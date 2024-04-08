@@ -1,0 +1,45 @@
+# VirtualBox Walkthrough
+
+This guide is to setup Ubuntu in VirtualBox. This is useful for programs that will not compile in the operating system you use. In this case I cannot use Orbiculum in windows.
+
+[Download VirtualBox here](https://www.virtualbox.org/) (I am using version 7.0.14)
+
+Install VirtualBox. I did not change any default settings.
+
+[Download Ubuntu ISO here](https://ubuntu.com/download/desktop) (I am using version 22.04.4) It is a large file, may take some time.
+
+Open VirtualBox and click New. Name the Virtual Machine. I named mine Ubuntu. Select the downloaded Ubuntu ISO. Select the folder you would like to save the Virtual Machine. 
+I placed mine in "C:/VitrualBox". Select the ISO Image that was downloaded for Ubuntu. Click Next.
+
+Type in a username and password that you like. Click the guest additions check box. Click Next.
+
+Select a base memory, make sure it is in the green, I selected 8000 MB. Similar with Processors, I selected 4. Click Next.
+
+I selected 25 GB for the hard disk for the "Create a virtual hard disk now". (Make sure to at least give it 25 GB or installation will error out) Click next and Finish. Wait for it to finish.
+
+Walk through the Ubuntu startup. I selected Skip, then "Skip for now" and Next, then "No, don't send system info" and Next, then Done.
+
+Now for more VirtualBox functionality, I will install VirtualBox Guest Additions. In the VirtualBox menu, click Devices. And click insert guest additions CD image. 
+
+Click on the image of a CD that appeared in the taskbar in Ubuntu. Right click in the window where a file or folder is not located and click "open in terminal".
+
+Type in `./autorun.sh` and click enter. Type in your password to run the instillation. Now the Ubuntu should be able to stretch and move when you resize the VirtualBox window on your host machine.
+
+If you get strange visual artifacting or screen tearing. Click on "view" in the VirtualBox menu. Click Virtual Screen 1 and select "resize to ...". As long as it is not a scaled output, it should not give visual artifacts.
+
+You can close the terminal and the CD image folder. Right click on the image of the CD in the task bar and select eject and unmount.
+
+On the VirtualBox menu select Devices. Then select shared clipboard and drag and drop. I prefer to set these as bidirectional, but you can choose how you want to run them. (Run VirtualBox as administrator on host computer if these features don't work).
+
+In the same Devices menu, select shared folders and shared folders settings. Click the plus symbol over the folder on the right. Select the Folder path. I like to chose the downloads folder on the host computer.
+then name the folder that will end up on the virtual machine. In this case Downloads for me. Then type in the mount point as `~/Documents` . Click Auto-mount and Make Permanent.
+
+Shut down the virtual machine by clicking the volume icon in the top right and clicking Power Off and Power Off.
+
+To pass through a USB device to the Virtual Machine, select the Ubuntu image on the left and then the orange gear icon on the right for settings. Select Enable USB Controller, make sure it is on USB 2.0 Controller, and then select the plus over the USB icon on the right.
+Select whichever devices you would like to share with the virtual machine.
+
+To add your username to the sudoers file, open the terminal and type in `su root` to enter root. Enter your password. Input command `apt-get install sudo -y` to install `sudo`. Add user to sudoers file by inputting `adduser username sudo`, put your username in place of `username`. Set the correct permissions for sudoers file by inputting `chmod  0440  /etc/sudoers`. Type `exit` and hit Enter until you close your terminal window. Shutdown your system completely and reboot.
+
+Reopen the Ubuntu Virtual machine. You are all done with setup.
+
